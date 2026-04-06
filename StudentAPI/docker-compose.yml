@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  api:
+    build: .
+    ports:
+      - "5000:80"
+    depends_on:
+      - sql
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sql;Database=StudentDB;User Id=sa;Password=Your_password123;TrustServerCertificate=True
+
+  sql:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
